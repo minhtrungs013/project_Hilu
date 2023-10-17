@@ -7,7 +7,6 @@ import {
   AGE_INCORRECT_FORMAT,
   CONFIRM_PASSWORD_INCORRECT,
   DEFAULT_IMAGE,
-  NAME,
   PHONE_NUMBER_INCORRECT_FORMAT,
   REGEX, REGEX_BIRTHDAY, REGEX_NUMBER,
   ROLE_DEFAULT,
@@ -15,7 +14,6 @@ import {
   SPECIAL_CHARACTERS,
   TYPE_MESSAGE_ERROR,
   TYPE_MESSAGE_WARNING,
-  VALUE
 } from '../../commom/messageConstant';
 import { CURRENT_DATE } from '../../utils/utils';
 import "./register.css";
@@ -46,11 +44,11 @@ export default function Register() {
    */
   const handleRegisterForm = (event) => {
     event.preventDefault();
-    const fieldName = event.target.getAttribute(NAME, VALUE);
-    const fieldValue = event.target.value;
-    const newFormData = { ...newUser };
-    newFormData[fieldName] = fieldValue;
-    setNewUser(newFormData);
+    const { name, value } = event.target;
+    setNewUser((prevNewUser) => ({
+      ...prevNewUser,
+      [name]: value,
+    }));
   };
 
   /**

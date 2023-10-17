@@ -10,18 +10,34 @@ import {
   SLASH,
   TYPE_MESSAGE_ERROR,
   TYPE_MESSAGE_WARNING,
-  USER_NAME_CHARACTERS
+  USER_NAME_CHARACTERS,
 } from '../../commom/messageConstant';
-import { setLoggedIn, setRoleUser, setUser } from '../redux/_actions/user.actions';
+import { setLoggedIn, setRoleUser } from '../redux/_actions/user.actions';
 import "./login.css";
 
 export default function Login() {
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
-  const [username, setUsername] = useState(null);
-  const [password, setPassword] = useState(null);
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.userReducer.loggedIn);
+  const [user, setUser] = useState({
+    username: null,
+    password: null
+  });
+
+  /**
+   * Handles form input changes and updates the user's data accordingly.
+   *
+   * @param {Event} event - The event object representing the form input change event.
+   */
+  const handleLoginForm = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
+  };
 
   /**
    * Redirect the user to the home page if they are already logged in.
@@ -47,17 +63,17 @@ export default function Login() {
     event.preventDefault();
 
     // Check if the provided username matches a regular expression (REGEX).
-    if (REGEX.test(username)) {
+    if (REGEX.test(user.username)) {
       showMessage(TYPE_MESSAGE_WARNING, USER_NAME_CHARACTERS)
       return
     }
 
     // Check if either the username or password is null.
-    if (username === null || password === null) {
+    if (user.username === null || user.password === null) {
       showMessage(TYPE_MESSAGE_WARNING, ENTER_ALL_INFORMATION)
       return
     }
-    await loginAPI('auth/login', { username, password })
+    await loginAPI('auth/login', user)
       .then((response) => {
         if (response) {
           localStorage.setItem(ACCESS_TOKEN, response.data.data.token)
@@ -70,26 +86,6 @@ export default function Login() {
       .catch((error) => {
         showMessage(TYPE_MESSAGE_ERROR, error.response?.data?.message)
       });
-  };
-
-  /**
-   * Handles the event when the value of the username field changes.
-   *
-   * @param {Event} event - The event object containing information about the value change event.
-   * @returns {void}
-   */
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
-  /**
-   * Handles the event when the value of the password field changes.
-   *
-   * @param {Event} event - The event object containing information about the value change event.
-   * @returns {void}
-   */
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
   };
 
   /**
@@ -122,11 +118,11 @@ export default function Login() {
                 <form onSubmit={handleSubmit} className='login_form'>
                   <div className='login_item'>
                     <label className='login_text'> User Name</label>
-                    <input type="text" className='login_input' onChange={handleUsernameChange} placeholder='User name' />
+                    <input type="text" className='login_input' name="username" onChange={handleLoginForm} placeholder='User name' />
                   </div>
                   <div className='login_item'>
                     <label className='login_text'> Password</label>
-                    <input type="password" className='login_input' onChange={handlePasswordChange} placeholder='password' />
+                    <input type="password" className='login_input' name="password" onChange={handleLoginForm} placeholder='password' />
                   </div>
                   <div className='login_item'>
                     <Checkbox className='login_check'></Checkbox>
