@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.App_login {
+   background-image: url("https://nv.edu.vn/wp-content/uploads/2020/08/english-course.jpg");
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
