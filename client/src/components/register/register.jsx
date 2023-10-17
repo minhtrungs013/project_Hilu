@@ -15,7 +15,6 @@ import {
   TYPE_MESSAGE_ERROR,
   TYPE_MESSAGE_WARNING,
 } from '../../commom/messageConstant';
-import { CURRENT_DATE } from '../../utils/utils';
 import "./register.css";
 
 export default function Register() {
@@ -73,7 +72,12 @@ export default function Register() {
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
 
-    const secondDate = new Date(newUser.dateOfBirth).getTime();
+    const today = new Date()
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const CURRENT_DATE = new Date(`${year}-${month}-${day}`).getTime();
+    const SECOND_DATE = new Date(newUser.dateOfBirth).getTime();
 
     if (REGEX.test(newUser.username) || REGEX.test(newUser.surname) || REGEX.test(newUser.name)) {
       showMessage(TYPE_MESSAGE_WARNING, SPECIAL_CHARACTERS)
@@ -90,7 +94,7 @@ export default function Register() {
       return
     }
 
-    if (CURRENT_DATE === secondDate || CURRENT_DATE < secondDate) {
+    if (CURRENT_DATE === SECOND_DATE || CURRENT_DATE < SECOND_DATE) {
       showMessage(TYPE_MESSAGE_WARNING, REGEX_BIRTHDAY)
       return
     }
