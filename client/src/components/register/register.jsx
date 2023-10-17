@@ -39,6 +39,11 @@ export default function Register() {
     age: null
   });
 
+  /**
+   * Handle changes in the registration form fields and update the user data accordingly.
+   * 
+   * @param {Event} event - The event triggered by a form field change.
+   */
   const handleRegisterForm = (event) => {
     event.preventDefault();
     const fieldName = event.target.getAttribute(NAME, VALUE);
@@ -48,12 +53,25 @@ export default function Register() {
     setNewUser(newFormData);
   };
 
+  /**
+   * Redirect the user to the home page if they are already logged in.
+   *
+   * This effect checks if the user is logged in and automatically navigates to the home page.
+   *
+   * @param {boolean} isLoggedIn - A boolean indicating the user's login status.
+   * @param {function} navigate - A function to navigate to different pages.
+   */
   useEffect(() => {
     if (isLoggedIn) {
       navigate(SLASH);
     }
   }, [isLoggedIn, navigate]);
 
+  /**
+   * Handle user registration form submission.
+   *
+   * @param {Event} event - The form submission event.
+   */
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
 
@@ -96,6 +114,12 @@ export default function Register() {
       });
   };
 
+  /**
+   * Display a message using Ant Design's message component.
+   *
+   * @param {string} type - The message type (e.g., 'success', 'error', 'warning', 'info').
+   * @param {string} message - The message content.
+   */
   const showMessage = (type, message) => {
     messageApi.open({
       type: type,

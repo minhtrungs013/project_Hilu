@@ -1,3 +1,8 @@
+/**
+ * Get the current date as a timestamp.
+ *
+ * @returns {number} The current date as a timestamp.
+ */
 export const CURRENT_DATE = () => {
     const today = new Date()
     const year = today.getFullYear();
