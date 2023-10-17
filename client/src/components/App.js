@@ -1,5 +1,6 @@
-import React from 'react';
-import { Route, Routes, } from "react-router-dom";
+import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { Route, Routes, useNavigate } from "react-router-dom";
 import './App.css';
 import Admin from './admin/admin';
 import Login from './login/login';
@@ -7,25 +8,27 @@ import Register from './register/register';
 import User from './users/user';
 
 function App() {
-  // const navigate = useNavigate();
-  const role = "Admin";
-  const isLoggedIn = false;
+  const navigate = useNavigate();
+  const role = useSelector(state => state.userReducer.role);
+  const isLoggedIn = useSelector(state => state.userReducer.loggedIn);
+  const hasNavigated = useRef(false);
 
-  // useEffect(() => {
-  //   if (isLoggedIn === false || isLoggedIn === null) {
-  //     navigate("/login");
-  //   }
-  // }, [isLoggedIn]);
+  useEffect(() => {
+    if (!isLoggedIn) {
+      if (!hasNavigated.current) {
+        navigate("/login");
+        hasNavigated.current = true;
+      }
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
-    <div className={isLoggedIn === false || isLoggedIn === null ? 'App_login' : 'App'}>
+    <div className={!isLoggedIn ? 'App_login' : 'App'}>
       <Routes>
         <Route path="/login" exact element={<Login />} />
-      </Routes>
-      <Routes>
         <Route path="/register" exact element={<Register />} />
       </Routes>
-      {isLoggedIn === true ? (
+      {isLoggedIn ? (
         <>
           {role === "Admin" ? <Admin></Admin> : <User></User>}
         </>

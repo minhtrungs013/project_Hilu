@@ -1,9 +1,17 @@
 import { Checkbox, Col, Row, message } from 'antd';
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
 import { loginAPI } from "../../api/service/AuthService";
-
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  ACCESS_TOKEN,
+  ENTER_ALL_INFORMATION,
+  REGEX,
+  SLASH,
+  TYPE_MESSAGE_ERROR,
+  TYPE_MESSAGE_WARNING,
+  USER_NAME_CHARACTERS
+} from '../../commom/messageConstant';
 import { setLoggedIn, setRoleUser, setUser } from '../redux/_actions/user.actions';
 import "./login.css";
 
@@ -16,43 +24,33 @@ export default function Login() {
   const isLoggedIn = useSelector(state => state.userReducer.loggedIn);
 
   useEffect(() => {
-    if (isLoggedIn === 'true') {
-      navigate("/");
+    if (isLoggedIn) {
+      navigate(SLASH);
     }
   }, [isLoggedIn, navigate]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const regex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>?]+/;
-    if (regex.test(username)) {
-      messageApi.open({
-        type: 'warning',
-        content: 'User name cannot contain special characters',
-      });
+    if (REGEX.test(username)) {
+      showMessage(TYPE_MESSAGE_WARNING, USER_NAME_CHARACTERS)
       return
     }
     if (username === null || password === null) {
-      messageApi.open({
-        type: 'warning',
-        content: 'You need to enter all the information',
-      });
+      showMessage(TYPE_MESSAGE_WARNING, ENTER_ALL_INFORMATION)
+      return
     } else {
       await loginAPI('auth/login', { username, password })
         .then((response) => {
           if (response) {
-            localStorage.setItem('token', response.data.data.token)
+            localStorage.setItem(ACCESS_TOKEN, response.data.data.token)
             dispatch(setRoleUser(response.data.data.role))
             dispatch(setLoggedIn(true))
             dispatch(setUser(response.data.data))
-            navigate("/")
+            navigate(SLASH)
           }
         })
         .catch((error) => {
-          console.log(error);
-          messageApi.open({
-            type: 'error',
-            content: error.response?.data?.message,
-          });
+          showMessage(TYPE_MESSAGE_ERROR, error.response?.data?.message)
         });
     }
 
@@ -66,6 +64,12 @@ export default function Login() {
     setPassword(event.target.value);
   };
 
+  const showMessage = (type, message) => {
+    messageApi.open({
+      type: type,
+      content: message,
+    });
+  }
   return (
     <>
       {contextHolder}
