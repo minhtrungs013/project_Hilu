@@ -23,47 +23,81 @@ export default function Login() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.userReducer.loggedIn);
 
+  /**
+   * Redirect the user to the home page if they are already logged in.
+   *
+   * This effect checks if the user is logged in and automatically navigates to the home page.
+   *
+   * @param {boolean} isLoggedIn - A boolean indicating the user's login status.
+   * @param {function} navigate - A function to navigate to different pages.
+   */
   useEffect(() => {
     if (isLoggedIn) {
       navigate(SLASH);
     }
   }, [isLoggedIn, navigate]);
 
+  /**
+   * Handles the submission of a form, attempting to log in with the provided username and password.
+   *
+   * @param {Event} event - The event object representing the form submission.
+   * @returns {Promise<void>} A Promise that resolves when the login process is complete.
+   */
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Check if the provided username matches a regular expression (REGEX).
     if (REGEX.test(username)) {
       showMessage(TYPE_MESSAGE_WARNING, USER_NAME_CHARACTERS)
       return
     }
+
+    // Check if either the username or password is null.
     if (username === null || password === null) {
       showMessage(TYPE_MESSAGE_WARNING, ENTER_ALL_INFORMATION)
       return
-    } else {
-      await loginAPI('auth/login', { username, password })
-        .then((response) => {
-          if (response) {
-            localStorage.setItem(ACCESS_TOKEN, response.data.data.token)
-            dispatch(setRoleUser(response.data.data.role))
-            dispatch(setLoggedIn(true))
-            dispatch(setUser(response.data.data))
-            navigate(SLASH)
-          }
-        })
-        .catch((error) => {
-          showMessage(TYPE_MESSAGE_ERROR, error.response?.data?.message)
-        });
     }
-
+    await loginAPI('auth/login', { username, password })
+      .then((response) => {
+        if (response) {
+          localStorage.setItem(ACCESS_TOKEN, response.data.data.token)
+          dispatch(setRoleUser(response.data.data.role))
+          dispatch(setLoggedIn(true))
+          dispatch(setUser(response.data.data))
+          navigate(SLASH)
+        }
+      })
+      .catch((error) => {
+        showMessage(TYPE_MESSAGE_ERROR, error.response?.data?.message)
+      });
   };
 
+  /**
+   * Handles the event when the value of the username field changes.
+   *
+   * @param {Event} event - The event object containing information about the value change event.
+   * @returns {void}
+   */
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
 
+  /**
+   * Handles the event when the value of the password field changes.
+   *
+   * @param {Event} event - The event object containing information about the value change event.
+   * @returns {void}
+   */
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
+  /**
+   * Display a message using the specified type and content.
+   *
+   * @param {string} type - The message type (e.g., 'success', 'error', 'warning', 'info').
+   * @param {string} message - The message content.
+   */
   const showMessage = (type, message) => {
     messageApi.open({
       type: type,

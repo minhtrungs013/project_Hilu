@@ -115,7 +115,7 @@ export default function Register() {
   };
 
   /**
-   * Display a message using Ant Design's message component.
+   * Display a message using the specified type and content.
    *
    * @param {string} type - The message type (e.g., 'success', 'error', 'warning', 'info').
    * @param {string} message - The message content.

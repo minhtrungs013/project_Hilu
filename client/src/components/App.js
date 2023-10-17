@@ -13,6 +13,14 @@ function App() {
   const isLoggedIn = useSelector(state => state.userReducer.loggedIn);
   const hasNavigated = useRef(false);
 
+  /**
+   * Redirects the user to the login page if they are not logged in.
+   *
+   * This effect checks the user's login status and navigates to the login page if the user is not logged in.
+   *
+   * @param {boolean} isLoggedIn - A boolean indicating the user's login status.
+   * @param {function} navigate - A function to navigate to different pages.
+   */
   useEffect(() => {
     if (!isLoggedIn) {
       if (!hasNavigated.current) {
