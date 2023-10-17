@@ -109,10 +109,7 @@ export default function Register() {
         navigate("/login")
       })
       .catch((error) => {
-        messageApi.open({
-          type: TYPE_MESSAGE_ERROR,
-          content: error.response.data.message,
-        });
+        showMessage(TYPE_MESSAGE_ERROR,error.response.data.message)
       });
   };
 
