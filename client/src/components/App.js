@@ -1,3 +1,4 @@
+import { Col, Row } from 'antd';
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -38,7 +39,11 @@ function App() {
       </Routes>
       {isLoggedIn ? (
         <>
-          {role === "Admin" ? <Admin></Admin> : <User></User>}
+          <Row >
+            <Col span={16} offset={4}>
+            {role === "Admin" ? <Admin></Admin> : <User></User>}
+            </Col>
+          </Row>
         </>
       ) : null}
     </div>

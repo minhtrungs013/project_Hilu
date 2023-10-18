@@ -20,12 +20,8 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userId: action.payload?.userId,
-                userName: action.payload?.name || action.payload?.username,
-            };
-        case Constants.SET_ROLE_USER:
-            return {
-                ...state,
-                role: action.payload,
+                userName: action.payload?.username,
+                role: action.payload?.role
             };
         case Constants.SET_LOGGED_IN:
             return {

@@ -1,7 +1,10 @@
 import React from 'react'
+import Navbar from '../navbar/navbar'
 
 export default function User() {
   return (
-    <div>User</div>
+    <div>
+      <Navbar></Navbar>
+    </div>
   )
 }

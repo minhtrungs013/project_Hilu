@@ -14,19 +14,6 @@ export const setUser = (user) => {
 };
 
 /**
- * Sets the user's role.
- * 
- * @param role {string} The user's new role.
- * @returns {object} An action object with the type Constants.SET_ROLE_USER and the payload role.
- */
-export const setRoleUser = (role) => {
-  return {
-    type: Constants.SET_ROLE_USER,
-    payload: role,
-  };
-};
-
-/**
  * Action creator for setting the user's login status.
  *
  * @param {boolean} LoggedIn - A boolean indicating the user's login status.

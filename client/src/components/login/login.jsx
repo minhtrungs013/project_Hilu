@@ -12,7 +12,7 @@ import {
   TYPE_MESSAGE_WARNING,
   USER_NAME_CHARACTERS,
 } from '../../commom/messageConstant';
-import { setLoggedIn, setRoleUser } from '../redux/_actions/user.actions';
+import { setLoggedIn, setUser } from '../redux/_actions/user.actions';
 import "./login.css";
 
 export default function Login() {
@@ -20,7 +20,7 @@ export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.userReducer.loggedIn);
-  const [user, setUser] = useState({
+  const [userLogin, setUserLogin] = useState({
     username: null,
     password: null
   });
@@ -33,7 +33,7 @@ export default function Login() {
   const handleLoginForm = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
-    setUser((prevUser) => ({
+    setUserLogin((prevUser) => ({
       ...prevUser,
       [name]: value,
     }));
@@ -63,21 +63,20 @@ export default function Login() {
     event.preventDefault();
 
     // Check if the provided username matches a regular expression (REGEX).
-    if (REGEX.test(user.username)) {
+    if (REGEX.test(userLogin.username)) {
       showMessage(TYPE_MESSAGE_WARNING, USER_NAME_CHARACTERS)
       return
     }
 
     // Check if either the username or password is null.
-    if (user.username === null || user.password === null) {
+    if (userLogin.username === null || userLogin.password === null) {
       showMessage(TYPE_MESSAGE_WARNING, ENTER_ALL_INFORMATION)
       return
     }
-    await loginAPI('auth/login', user)
+    await loginAPI('auth/login', userLogin)
       .then((response) => {
         if (response) {
           localStorage.setItem(ACCESS_TOKEN, response.data.data.token)
-          dispatch(setRoleUser(response.data.data.role))
           dispatch(setLoggedIn(true))
           dispatch(setUser(response.data.data))
           navigate(SLASH)
