@@ -137,14 +137,10 @@ export default function Login() {
                   </div>
                 </form>
               </div>
-
             </Col>
           </Row>
-
-
         </div>
       </div>
     </>
-
   )
 }
