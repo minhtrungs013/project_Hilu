@@ -1,15 +1,15 @@
-import { BellOutlined, PoweroffOutlined } from '@ant-design/icons';
+import { PoweroffOutlined, ProfileOutlined } from '@ant-design/icons';
 import { faBars, faBlog, faBook, faPen, faSpellCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Col, Row } from 'antd';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from "react-router-dom";
 import { setLoggedIn, setUser } from '../redux/_actions/user.actions';
 import "./navbar.css";
 
 export default function Navbar() {
     const navigate = useNavigate();
-    const userName = useSelector(state => state.userReducer.userName);
     const dispatch = useDispatch();
 
     /**
@@ -25,72 +25,86 @@ export default function Navbar() {
     }
 
     return (
-        <div className='navbar_user'>
-            <div className='navbar__item'>
-                <div className='navbar__left'>
-                    <div className='Navigate__heading1'>
-                        <img src="https://estudyme.com/_next/image/?url=%2Fimages%2Fapp%2Festudyme%2Ficon-support-3d.png&w=256&q=100" alt="" className='user_img1' />
-                    </div>
-                </div>
-                <div className='navbar__center'>
-                    <ul className='navbar__center-list'>
-                        <li className='navbar__center-item'>
-                            <NavLink style={({ isActive }) => {
-                                return isActive ? { color: 'red' } : {}
-                            }} className="navbar__center-item-link " to="/vocabulary">
-                                <FontAwesomeIcon className='navbar__item-icon' icon={faBook} />
-                                Vocabulary
-                            </NavLink>
-                        </li>
-                        <li className='navbar__center-item'>
-                            <NavLink style={({ isActive }) => {
-                                return isActive ? { color: 'red' } : {}
-                            }} className="navbar__center-item-link " to="/grammar">
-                                <FontAwesomeIcon className='navbar__item-icon' icon={faSpellCheck} />
-                                Grammar
-                            </NavLink>
-                        </li>
-                        <li className='navbar__center-item'>
-                            <NavLink style={({ isActive }) => {
-                                return isActive ? { color: 'red' } : {}
-                            }} className="navbar__center-item-link " to="/practice">
-                                <FontAwesomeIcon className='navbar__item-icon' icon={faPen} />
-                                Practice
-                            </NavLink>
-                        </li>
-                        <li className='navbar__center-item'>
-                            <NavLink style={({ isActive }) => {
-                                return isActive ? { color: 'red' } : {}
-                            }} className="navbar__center-item-link " to="/blog">
-                                <FontAwesomeIcon className='navbar__item-icon' icon={faBlog} />
-                                Blog
-                            </NavLink>
+        <Row >
+            <Col span={14} offset={5}>
+                <div className='navbar_user'>
+                    <div className='navbar__item'>
+                        <div className='navbar__left'>
+                            <div className='Navigate__heading1'>
+                                <NavLink to="/">
+                                    <img src="https://estudyme.com/_next/image/?url=%2Fimages%2Fapp%2Festudyme%2Ficon-support-3d.png&w=256&q=100" alt="" className='user_img1' />
+                                </NavLink>
+                            </div>
+                        </div>
+                        <div className='navbar__center'>
+                            <ul className='navbar__center-list'>
+                                <li className='navbar__center-item'>
+                                    <NavLink style={({ isActive }) => {
+                                        return isActive ? { color: 'red' } : {}
+                                    }} className="navbar__center-item-link " to="/vocabulary">
+                                        <FontAwesomeIcon className='navbar__item-icon' icon={faBook} />
+                                        Vocabulary
+                                    </NavLink>
+                                </li>
+                                <li className='navbar__center-item'>
+                                    <NavLink style={({ isActive }) => {
+                                        return isActive ? { color: 'red' } : {}
+                                    }} className="navbar__center-item-link " to="/grammar">
+                                        <FontAwesomeIcon className='navbar__item-icon' icon={faSpellCheck} />
+                                        Grammar
+                                    </NavLink>
+                                </li>
+                                <li className='navbar__center-item'>
+                                    <NavLink style={({ isActive }) => {
+                                        return isActive ? { color: 'red' } : {}
+                                    }} className="navbar__center-item-link " to="/practice">
+                                        <FontAwesomeIcon className='navbar__item-icon' icon={faPen} />
+                                        Practice
+                                    </NavLink>
+                                </li>
+                                <li className='navbar__center-item'>
+                                    <NavLink style={({ isActive }) => {
+                                        return isActive ? { color: 'red' } : {}
+                                    }} className="navbar__center-item-link " to="/blog">
+                                        <FontAwesomeIcon className='navbar__item-icon' icon={faBlog} />
+                                        Blog
+                                    </NavLink>
 
-                        </li>
-                        <li className='navbar__center-item'>
-                            <NavLink style={({ isActive }) => {
-                                return isActive ? { color: 'red' } : {}
-                            }} className="navbar__center-item-link " to="/test">
-                                <FontAwesomeIcon className='navbar__item-icon' icon={faBars} />
-                                Test
-                            </NavLink>
-                        </li>
-                    </ul>
+                                </li>
+                                <li className='navbar__center-item'>
+                                    <NavLink style={({ isActive }) => {
+                                        return isActive ? { color: 'red' } : {}
+                                    }} className="navbar__center-item-link " to="/test">
+                                        <FontAwesomeIcon className='navbar__item-icon' icon={faBars} />
+                                        Test
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className='navbar__rigth'>
+                            <div className='user'>
+                                <img src="https://lh3.googleusercontent.com/a/ACg8ocKyWGHnSoxDB7M0Gjo-bTf_1RRLDxHV3MqtHM4B2gfuyg=s96-c" alt="" className='user_img' />
+                                <div className='user_Profile_body'>
+                                    <ul className='user_Profile'>
+                                        <li>
+                                            <div className='navbar__rigth-user-icon'>
+                                                <span className='user_Profile-text'>Profile</span>
+                                                <ProfileOutlined style={{ color: "orange" }} />
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div className='navbar__rigth-user-icon' onClick={logOut}>
+                                                <span className='user_Profile-text'>LogOut</span>
+                                                <PoweroffOutlined style={{ color: "red" }} />
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className='navbar__rigth'>
-                    <div className='user'>
-                        {/* <img src={userData?.image} alt="" className='user_img' /> */}
-                        <img src="https://nv.edu.vn/wp-content/uploads/2020/08/english-course.jpg" alt="" className='user_img' />
-                        <span className='user__name'>{userName}</span>
-                    </div>
-                    <div className='navbar__rigth-user-icon'>
-                        <BellOutlined />
-                    </div>
-                    <div className='navbar__rigth-user-icon' onClick={logOut}>
-                        <PoweroffOutlined className='power' />
-                    </div>
-                </div>
-            </div>
-        </div>
+            </Col>
+        </Row>
     )
 }

@@ -19,13 +19,11 @@
 }
 
 .navbar__rigth {
-    padding-left: 10px;
     align-items: center;
     display: flex;
 }
 
 .navbar_user {
-    padding: 0 20px;
     border-bottom-left-radius: 6px;
     border-bottom: 1px solid #f1f0f0;
 
@@ -64,7 +62,7 @@
 }
 
 .navbar__center-item {
-    padding: 5px 10px;
+    padding: 10px 9px;
     list-style: none;
     text-decoration: none;
     display: block;
@@ -77,7 +75,7 @@
 }
 
 .navbar__center-item:hover {
-    box-shadow: 0px 4px 4px 0px #f8131350;
+    background: #f3f7f9;
 }
 
 .navbar__center-item-link:hover {
@@ -99,21 +97,27 @@
 .navbar__rigth-user-icon {
     font-size: 16px;
     color: #495057;
-    padding: 7px 10px;
-    margin: 10px;
     border-radius: 6px;
     cursor: pointer;
-    display: block;
+    display: flex;
+    padding: 7px 10px;
+    justify-content: space-between;
 }
 
 .navbar__rigth-user-icon:hover {
-    box-shadow: 0px 4px 4px 0px #f8131350;
+    background: #f3f7f9;
+}
+
+.user_Profile-text  {
+    padding-right: 20px;
 }
 
 .user {
     display: flex;
     align-items: center;
-    margin-right: 10px;
+    position: relative;
+    margin-right: 13px;
+    cursor: pointer;
 }
 
 .user_img {
@@ -140,26 +144,35 @@
     position: absolute;
     content: "";
     background-color: transparent;
-    height: 30px;
-    width: 150px;
-    top: 40px;
-    right: 18.2%;
+    height: 29px;
+    width: 131px;
+    top: 33px;
+    right: 0px;
 }
 
-.user:hover .user__list {
-    display: block;
+.user:hover .user_Profile_body {
+    display: block !important;
 }
 
-.user__list {
+.user_Profile_body {
+    z-index: 10;
     display: none;
-    z-index: 2;
-    top: 7%;
     position: absolute;
-    background-color: #fff7ff;
-    height: 100px;
-    width: 150px;
-    right: 17%;
-    border-radius: 10px;
-    box-shadow: 0 1px 15px 1px rgba(17, 18, 19, 0.35);
+    right: 0;
+    top: 45px;
+    background-color: #ffff;
+    text-decoration: none;
+    border-radius: 6px;
+    box-shadow: 1px 1px 4px 0px #c0c2c2;
+}
 
+.user_Profile {
+    margin: 0;
+    text-decoration: none;
+    padding-left: 0;
+}
+
+.user_Profile li {
+    list-style: none;
+    padding: 5px 10px;
 }
