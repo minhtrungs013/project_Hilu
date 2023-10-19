@@ -7,7 +7,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from "react-router-dom";
 import { changePasswordAPI } from "../../../api/service/AuthService";
 import { getUser, updateUser } from "../../../api/service/UserService";
-import { CONFIRM_CHANGE_PASSWORD, DEFAULT_IMAGE, IMAGE_NANE_EXISTS, INVALID_TOKEN, TYPE_MESSAGE_WARNING } from '../../../commom/messageConstant';
+import {
+    AGE_INCORRECT_FORMAT,
+    CONFIRM_CHANGE_PASSWORD,
+    CONFIRM_PASSWORD_INCORRECT,
+    CONTACT_ADMIN,
+    DEFAULT_IMAGE,
+    IMAGE_NANE_EXISTS,
+    INVALID_TOKEN,
+    PHONE_NUMBER_INCORRECT_FORMAT,
+    REGEX, REGEX_BIRTHDAY,
+    REGEX_NUMBER,
+    SPECIAL_CHARACTERS,
+    TYPE_MESSAGE_ERROR,
+    TYPE_MESSAGE_WARNING
+} from '../../../commom/messageConstant';
 import { handleUpload } from '../../../utils/utils';
 import { setLoggedIn, setUser } from '../../redux/_actions/user.actions';
 import "./profile.css";
@@ -131,7 +145,7 @@ export default function Profile() {
                 navigate("/login");
             }
         }).catch((error) => {
-            console.log(error);
+            showMessage(TYPE_MESSAGE_ERROR, CONTACT_ADMIN)
         })
     }
 
@@ -142,6 +156,7 @@ export default function Profile() {
      */
     const changeUser = () => {
         cancelCourse()
+        setNewData(dataUser?.userInfo)
         setShowChangeUser(!showChangeUser)
     }
 
@@ -154,12 +169,44 @@ export default function Profile() {
      */
     const handleUpdateUser = () => {
         setLoading(true)
+
+        const today = new Date()
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        const CURRENT_DATE = new Date(`${year}-${month}-${day}`).getTime();
+        const SECOND_DATE = new Date(newData.dateOfBirth).getTime();
+
+        if (REGEX.test(newData.surname) || REGEX.test(newData.name)) {
+            showMessage(TYPE_MESSAGE_WARNING, SPECIAL_CHARACTERS)
+            setLoading(false)
+            return
+        }
+
+        if (!REGEX_NUMBER.test(newData.phone)) {
+            showMessage(TYPE_MESSAGE_WARNING, PHONE_NUMBER_INCORRECT_FORMAT)
+            setLoading(false)
+            return
+        }
+
+        if (!REGEX_NUMBER.test(newData.age)) {
+            showMessage(TYPE_MESSAGE_WARNING, AGE_INCORRECT_FORMAT)
+            setLoading(false)
+            return
+        }
+
+        if (CURRENT_DATE === SECOND_DATE || CURRENT_DATE < SECOND_DATE) {
+            showMessage(TYPE_MESSAGE_WARNING, REGEX_BIRTHDAY)
+            setLoading(false)
+            return
+        }
+
         updateUser(`user-infos?user-id=${userId}`, newData).then((res) => {
             if (res) {
                 getUserById(userId)
             }
         }).catch((error) => {
-            console.log(error);
+            showMessage(TYPE_MESSAGE_ERROR, CONTACT_ADMIN)
         })
     }
 
@@ -179,10 +226,7 @@ export default function Profile() {
         if (data === INVALID_TOKEN) {
             window.location.href = `https://www.dropbox.com/oauth2/authorize?response_type=code&client_id=lntimln3hpjnwx4&redirect_uri=${encodeURIComponent(URIPath)}&response_type=code`
         } else if (data === IMAGE_NANE_EXISTS) {
-            messageApi.open({
-                type: TYPE_MESSAGE_WARNING,
-                content: data,
-            });
+            showMessage(TYPE_MESSAGE_WARNING, data)
             setLoadingImage(false)
         } else {
             newData.imageURL = data[0]
@@ -226,6 +270,13 @@ export default function Profile() {
      */
     const showChangePasswordConfirm = () => {
         setLoading(true)
+
+        if (newPassword.newPassword !== newPassword.confirmNewPassword) {
+            showMessage(TYPE_MESSAGE_WARNING, CONFIRM_PASSWORD_INCORRECT)
+            setLoading(false)
+            return
+        }
+
         confirm({
             title: 'Note',
             icon: <ExclamationCircleFilled />,
@@ -272,6 +323,20 @@ export default function Profile() {
             spin
         />
     );
+
+    /**
+   * Display a message using the specified type and content.
+   *
+   * @param {string} type - The message type (e.g., 'success', 'error', 'warning', 'info').
+   * @param {string} message - The message content.
+   */
+    const showMessage = (type, message) => {
+        messageApi.open({
+            type: type,
+            content: message,
+        });
+    }
+
 
     return (
         <div className='home'>

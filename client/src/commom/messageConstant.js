@@ -8,13 +8,13 @@ export const REGEX_NUMBER = /^\d+$/;
 
 export const SPECIAL_CHARACTERS = 'Cannot contain special characters';
 
-export const PHONE_NUMBER_INCORRECT_FORMAT = 'is not in the correct format';
+export const PHONE_NUMBER_INCORRECT_FORMAT = 'Phone number is not in the correct format';
 
 export const REGEX_BIRTHDAY = 'The date of birth must not coincide with the current date';
 
 export const CONFIRM_PASSWORD_INCORRECT = 'Password does not match, please re-enter';
 
-export const AGE_INCORRECT_FORMAT = 'is not in the correct format';
+export const AGE_INCORRECT_FORMAT = 'Age is not in the correct format';
 
 export const TYPE_MESSAGE_SUCCESS = "success";
 
@@ -37,5 +37,7 @@ export const IMAGE_NANE_EXISTS = "Image name already exists";
 export const INVALID_TOKEN = "Invalid Access Token";
 
 export const CONFIRM_CHANGE_PASSWORD = 'Changing your password you will have to log in again!';
+
+export const CONTACT_ADMIN = 'Please contact admin for support';
 
 export const DEFAULT_IMAGE = "https://www.dropbox.com/scl/fi/j2jzyxg6q9hw9shxhe6m4/no-image.png?rlkey=zc2jnd2rdyb9oxe20bfmklcnz&raw=1";
