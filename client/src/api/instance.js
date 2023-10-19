@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create();
-const token = localStorage.getItem('token')
+const token = localStorage.getItem('access_token')
 API.interceptors.request.use((request) => {
   // request.withCredentials = true;
   if (token) {

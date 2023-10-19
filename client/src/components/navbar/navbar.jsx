@@ -87,10 +87,12 @@ export default function Navbar() {
                                 <div className='user_Profile_body'>
                                     <ul className='user_Profile'>
                                         <li>
-                                            <div className='navbar__rigth-user-icon'>
-                                                <span className='user_Profile-text'>Profile</span>
-                                                <ProfileOutlined style={{ color: "orange" }} />
-                                            </div>
+                                            <NavLink to="/profile">
+                                                <div className='navbar__rigth-user-icon'>
+                                                    <span className='user_Profile-text'>Profile</span>
+                                                    <ProfileOutlined style={{ color: "orange" }} />
+                                                </div>
+                                            </NavLink>
                                         </li>
                                         <li>
                                             <div className='navbar__rigth-user-icon' onClick={logOut}>

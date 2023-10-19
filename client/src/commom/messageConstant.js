@@ -32,4 +32,10 @@ export const NAME = "name";
 
 export const VALUE = "value";
 
+export const IMAGE_NANE_EXISTS = "Image name already exists";
+
+export const INVALID_TOKEN = "Invalid Access Token";
+
+export const CONFIRM_CHANGE_PASSWORD = 'Changing your password you will have to log in again!';
+
 export const DEFAULT_IMAGE = "https://www.dropbox.com/scl/fi/j2jzyxg6q9hw9shxhe6m4/no-image.png?rlkey=zc2jnd2rdyb9oxe20bfmklcnz&raw=1";
