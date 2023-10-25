@@ -339,7 +339,7 @@ export default function Profile() {
 
 
     return (
-        <div className='home'>
+        <>
             {contextHolder}
             <Row >
                 <Col span={14} offset={5}>
@@ -525,6 +525,6 @@ export default function Profile() {
                     </div>
                 </Col>
             </Row>
-        </div>
+        </>
     )
 }

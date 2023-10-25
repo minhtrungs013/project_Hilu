@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from "react-router-dom";
 import { setLoggedIn, setUser } from '../redux/_actions/user.actions';
 import "./navbar.css";
+import { ACCESS_TOKEN } from '../../commom/messageConstant';
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ export default function Navbar() {
      * It also navigates the user to the login page.
      */
     const logOut = () => {
+        localStorage.removeItem(ACCESS_TOKEN)
         dispatch(setUser(null))
         dispatch(setLoggedIn(false))
         navigate("/login");

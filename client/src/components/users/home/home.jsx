@@ -7,7 +7,7 @@ export default function Home() {
     const userName = useSelector(state => state.userReducer.userName);
 
     return (
-        <div className='home'>
+        <>
             <Row >
                 <Col span={14} offset={5}>
                     <div class="header-box">
@@ -21,6 +21,6 @@ export default function Home() {
                     </div>
                 </Col>
             </Row>
-        </div>
+        </>
     )
 }
