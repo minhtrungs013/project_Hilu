@@ -1,4 +1,4 @@
-import { Col, Row, Spin } from 'antd';
+import { Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { setPracticeId, setPracticeType } from '../../redux/_actions/practice.ac
 import "./practice.css";
 
 export default function Practice() {
-    
+
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch();
@@ -45,30 +45,27 @@ export default function Practice() {
 
     return (
         <>
-            <Row  >
-                <Col span={14} offset={5} className=''>
-                    <h1 className='practice__heading'>Practice </h1>
-                    {loading ?
-                        <div className="example">
-                            <Spin />
-                        </div> :
-                        <>
-                            <Row gutter={100} >
-                                {data?.map((item) => (
-                                    <Col span={6} key={item.id}>
-                                        <Link to={`/practice/skill`} className='practice__link'>
-                                            <div className='practice'>
-                                                <img className='practice_img' onClick={() => handleSetId(item)} src={item.imageURL} alt="" />
-                                                <h2>{item.name}</h2>
-                                            </div>
-                                        </Link>
-                                    </Col>
-                                ))}
-                            </Row>
-                        </>
-                    }
-                </Col>
-            </Row>
+            <h1 className='practice__heading'>Practice </h1>
+            {loading ?
+                <div className="example">
+                    <Spin />
+                </div> :
+                <>
+                    <div className='test row ' >
+                        {data?.map((item) => (
+                            <div className='col l-2 m-5 c-6' key={item.id}>
+                                <Link to={`/practice/skill`} className='practice__link'>
+                                    <div className='practice'>
+                                        <img className='practice_img' onClick={() => handleSetId(item)} src={item.imageURL} alt="" />
+                                        <h2>{item.name}</h2>
+                                    </div>
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
+                </>
+            }
+
         </>
     )
 }

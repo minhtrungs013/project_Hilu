@@ -7,9 +7,9 @@ import Practice from './practice/practice';
 
 export default function User() {
   return (
-    <div>
-      <Navbar></Navbar>
-      <div className='home'>
+    <div className='home'>
+      <div className='grid wide'>
+        <Navbar></Navbar>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />

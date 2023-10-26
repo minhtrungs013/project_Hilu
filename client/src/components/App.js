@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes, useNavigate } from "react-router-dom";
 import './App.css';
+import '../asset/css/grid.css'
+import '../asset/css/res.css'
 import Admin from './admin/admin';
 import Login from './login/login';
 import Register from './register/register';

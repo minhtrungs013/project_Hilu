@@ -2,7 +2,10 @@
     display: flex;
     align-items: center;
     text-align: center;
-    margin-right: 50px;
+}
+
+.navbar__pc {
+    display: none;
 }
 
 .navbar__item {
@@ -26,6 +29,7 @@
 .navbar_user {
     border-bottom-left-radius: 6px;
     border-bottom: 1px solid #f1f0f0;
+    background-color: white;
 
 }
 
@@ -85,6 +89,7 @@
 .navbar__center-item-link {
     display: block;
     color: #000000;
+    text-decoration: none;
     font-size: 16px;
     font-weight: 500;
 }
@@ -108,7 +113,7 @@
     background: #f3f7f9;
 }
 
-.user_Profile-text  {
+.user_Profile-text {
     padding-right: 20px;
 }
 
@@ -175,4 +180,75 @@
 .user_Profile li {
     list-style: none;
     padding: 5px 10px;
+}
+
+
+
+.navbar__tablet-mobile-icon {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 15px;
+    color: #ff0909ad;
+}
+
+
+.todo {
+    position: fixed;
+    z-index: 10;
+    max-height: 874px;
+    height: 100%;
+    width: 300px;
+    background: white;
+    left: -300px;
+    top: 70px;
+    transition: .5s ease;
+    transform: scaleX(0px);
+    box-shadow: 0 1px 1px 1px rgba(17, 18, 19, 0.35);
+}
+
+.cancel {
+    position: fixed;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 46px;
+    display: none;
+    z-index: 9;
+}
+
+.showcancel {
+    display: block;
+}
+
+
+.todo1 {
+    left: 0;
+}
+
+
+.todo__list {
+    text-decoration: none;
+    list-style: none;
+    padding-left: 0px;
+    margin: 0;
+}
+
+.todo__item {
+    border-bottom: 1px solid #d6d4d4;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
+
+.todo__item:hover {
+    background-color: rgb(246, 247, 247);
+}
+
+.menu {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }

@@ -8,6 +8,15 @@
 
 }
 
+.profile_item-body {
+    position: relative;
+
+}
+
+profile_item::first-line{
+    margin-left: 10px;
+}
+
 .profile_item_img {
     height: 170px;
     width: 170px;
