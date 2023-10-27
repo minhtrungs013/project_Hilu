@@ -25,3 +25,10 @@ export const setPracticeType = (type) => {
     payload: type,
   };
 };
+
+export const setPracticePartId = (id) => {
+  return {
+    type: Constants.SET_PRACTICE_PART_ID,
+    payload: id,
+  };
+};

@@ -44,7 +44,7 @@ export default function Practice() {
     }, []);
 
     return (
-        <>
+        <div style={{'minHeight': '513px'}}>
             <h1 className='practice__heading'>Practice </h1>
             {loading ?
                 <div className="example">
@@ -54,7 +54,7 @@ export default function Practice() {
                     <div className='test row ' >
                         {data?.map((item) => (
                             <div className='col l-2 m-5 c-6' key={item.id}>
-                                <Link to={`/practice/skill`} className='practice__link'>
+                                <Link to={`/practice/part`} className='practice__link'>
                                     <div className='practice'>
                                         <img className='practice_img' onClick={() => handleSetId(item)} src={item.imageURL} alt="" />
                                         <h2>{item.name}</h2>
@@ -66,6 +66,6 @@ export default function Practice() {
                 </>
             }
 
-        </>
+        </div>
     )
 }
