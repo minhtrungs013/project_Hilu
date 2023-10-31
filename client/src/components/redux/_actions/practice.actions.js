@@ -32,3 +32,11 @@ export const setPracticePartId = (id) => {
     payload: id,
   };
 };
+
+export const setPracticePart = (practicePart) => {
+  return {
+    type: Constants.SET_PRACTICE_PART,
+    payload: practicePart,
+  };
+};
+

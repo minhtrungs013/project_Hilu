@@ -1,6 +1,6 @@
 .pListen {
     z-index: 10;
-    border-radius: 20px;
+    border-radius: 13px;
     box-shadow: 1px 1px 4px 0px #23caef;
     overflow: hidden;
     transition: linear 0.15s;
@@ -15,7 +15,7 @@
 
 .pListen_img {
     height: 100%;
-    min-height: 160.049px;
+    min-height: 135.049px;
     width: 100%;
     margin-bottom: 10px;
 }
@@ -40,7 +40,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
-    margin-bottom: 37px;
+    margin-bottom: 23px;
     margin-top: 3px;
 }
 

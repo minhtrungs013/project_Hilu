@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { getPracticeParts } from '../../../../api/service/PracticeService';
-import { setPracticePartId } from '../../../redux/_actions/practice.actions';
+import { setPracticePart, setPracticePartId } from '../../../redux/_actions/practice.actions';
 import "./practicePart.css";
 
 export default function PracticePart() {
@@ -33,15 +33,16 @@ export default function PracticePart() {
         if (practiceId) {
             getPracticeParts(`parts?practice-id=${practiceId}`)
                 .then((res) => {
-                    setLoading(false)
+                    dispatch(setPracticePart(res.data.data))
                     setData(res.data.data);
+                    setLoading(false)
                 }).catch((Error) => {
                     console.log(Error)
                 })
         } else {
             navigate("/practice")
         }
-    }, [practiceId, navigate]);
+    }, [practiceId, navigate, dispatch]);
 
     return (
         <div style={{ 'minHeight': '513px' }}>
@@ -71,10 +72,10 @@ export default function PracticePart() {
                 <div className="example">
                     <Spin />
                 </div> :
-                <div className=' row test' >
+                <div className='row test' >
                     {data?.map((item) => (
-                        <div className='col l-2 m-4 c-6' key={item.id} >
-                            <Link to={'/practice/skill/topic'} onClick={() => changePracticePartId(item)} className='pListen__link'>
+                        <div className='col l-2 m-3 c-6' key={item.id} >
+                            <Link to={'/practice/part/topic'} onClick={() => changePracticePartId(item)} className='pListen__link'>
                                 <div className='pListen' >
                                     <img className='pListen_img' src={item.imageURL} alt="" />
                                     <Tooltip title={item.description} color="#2db7f5"  >

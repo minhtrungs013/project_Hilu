@@ -7,12 +7,12 @@ export default function Home() {
 
     return (
         <>
-            <div class="header-box">
-                <div class="icon">
+            <div classNames="header-box">
+                <div classNames="icon">
                     <img src="https://estudyme.com/_next/image/?url=%2Fimages%2Fapp%2Festudyme%2Ficon-support-3d.png&w=256&q=100" alt=""
                         width="129" height="129" decoding="async" data-nimg="future" loading="lazy" />
                 </div>
-                <div class="content">Welcome back
+                <div classNames="content">Welcome back
                     <span> {userName}!</span>
                 </div>
             </div>

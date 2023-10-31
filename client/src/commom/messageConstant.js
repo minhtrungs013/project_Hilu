@@ -32,6 +32,14 @@ export const NAME = "name";
 
 export const VALUE = "value";
 
+export const COLOR_SUCCESS = "#52c41a";
+
+export const COLOR_FAIL = "red";
+
+export const COLOR_MEDIUM = "#f29f05";
+
+export const COLOR_DEFAULT = "black";
+
 export const IMAGE_NANE_EXISTS = "Image name already exists";
 
 export const INVALID_TOKEN = "Invalid Access Token";

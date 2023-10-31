@@ -3,6 +3,8 @@ import { Constants } from "../_constants/constants";
 const initialState = {
   practiceId: null,
   practiceType: null,
+  practicePart: null,
+  practicePartId: null
 };
 
 /**
@@ -23,6 +25,16 @@ const practiceReducer = (state = initialState, action) => {
       return {
         ...state,
         practiceType: action.payload,
+      };
+    case Constants.SET_PRACTICE_PART:
+      return {
+        ...state,
+        practicePart: action.payload,
+      };
+    case Constants.SET_PRACTICE_PART_ID:
+      return {
+        ...state,
+        practicePartId: action.payload,
       };
     default:
       return state;

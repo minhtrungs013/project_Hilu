@@ -56,7 +56,7 @@ export default function Practice() {
                             <div className='col l-2 m-5 c-6' key={item.id}>
                                 <Link to={`/practice/part`} className='practice__link'>
                                     <div className='practice'>
-                                        <img className='practice_img' onClick={() => handleSetId(item)} src={item.imageURL} alt="" />
+                                        <img className='practice_img' onClick={() => handleSetId(item)} src={item.imageURL} alt=""  loading="eager" />
                                         <h2>{item.name}</h2>
                                     </div>
                                 </Link>

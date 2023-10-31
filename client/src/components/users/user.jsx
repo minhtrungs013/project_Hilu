@@ -6,6 +6,7 @@ import Profile from './profile/profile';
 import Practice from './practice/practice';
 import PracticePart from './practice/practicePart/practicePart';
 import Footer from '../footer/footer';
+import Test from './practice/practiceTopic/test/test';
 
 export default function User() {
   return (
@@ -17,6 +18,7 @@ export default function User() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/practice" element={<Practice />} />
           <Route path="/practice/part" element={<PracticePart />} />
+          <Route path="/practice/part/topic/*" element={<Test />} />
         </Routes>
         <Footer></Footer>
       </div>
